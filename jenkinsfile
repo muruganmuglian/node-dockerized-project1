@@ -1,26 +1,35 @@
 pipeline {
     agent any
-    stages{
-        stage("checkout"){
-            steps{
+
+    stages {
+        stage("Checkout") {
+            steps {
                 checkout scm
             }
         }
 
-        stage("Test"){
-            steps{
-                sh ' install npm'
-                sh 'npm test'
+        stage("Install Dependencies") {
+            steps {
+                sh 'npm install' // Fixed command to install npm dependencies
             }
         }
 
-        stage("Build"){
-            steps{
-                sh 'npm run build'
+        stage("Run Tests") {
+            steps {
+                sh 'npm test' // Run tests
             }
         }
- stage("Build image"){
-            steps{
-                sh 'docker build - my-node-app:1.0 .'
+
+        stage("Build") {
+            steps {
+                sh 'npm run build' // Build the application
             }
         }
+
+        stage("Build Docker Image") {
+            steps {
+                sh 'docker build -t my-node-app:1.0 .' // Correct docker build command
+            }
+        }
+    }
+}
