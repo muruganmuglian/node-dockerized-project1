@@ -10,7 +10,7 @@ pipeline {
 
         stage("Install Dependencies") {
             steps {
-                sh 'npm install' // Fixed command to install npm dependencies
+                bat 'npm install' // Fixed command to install npm dependencies
             }
         }
 
@@ -22,13 +22,13 @@ pipeline {
 
         stage("Build") {
             steps {
-                sh 'npm run build' // Build the application
+                bat 'npm run build' // Build the application
             }
         }
 
         stage("Build Docker Image") {
             steps {
-                sh 'docker build -t my-node-app:1.0 .' // Correct docker build command
+                bat 'docker build -t my-node-app:1.0 .' // Correct docker build command
             }
         }
     }
